@@ -33,21 +33,26 @@ export default class App extends React.Component {
   selectAnswers = (selectAnswer, nextQuestionId) => {
     switch (true) {
       case nextQuestionId === 'init':
-        this.displayNextQuestion(nextQuestionId)
+        setTimeout(() => this.displayNextQuestion(nextQuestionId), 500)
         break
+
+      case /^https*/.test(nextQuestionId): //nextQuestionIdがhttpsで始まるかどうか
+        const a = document.createElement('a')
+        a.href = nextQuestionId
+        a.target = '_blank'
+        a.click()
+        break
+
       default:
         const chats = this.state.chats
         chats.push({
           text: selectAnswer,
           type: 'answer',
         })
-
         this.setState({
           chats: chats,
         })
-
-        this.displayNextQuestion(nextQuestionId)
-
+        setTimeout(() => this.displayNextQuestion(nextQuestionId), 500)
         break
     }
   }
@@ -55,6 +60,13 @@ export default class App extends React.Component {
   componentDidMount() {
     const initAnswer = ''
     this.selectAnswers(initAnswer, this.state.currentId)
+  }
+
+  componentDidUpdate() {
+    const scrollArea = document.getElementById('scroll-area')
+    if (scrollArea) {
+      scrollArea.scrollTop = scrollArea.scrollHeight
+    }
   }
 
   render() {

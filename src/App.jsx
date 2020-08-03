@@ -1,7 +1,7 @@
 import React from 'react'
 import defaultDataset from './dataset'
 import './assets/styles/style.css'
-import { AnswersList, Chats } from './components'
+import { AnswersList, Chats, FormDialog } from './components'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,6 +14,8 @@ export default class App extends React.Component {
       open: false,
     }
     this.selectAnswers = this.selectAnswers.bind(this)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   displayNextQuestion = (nextQuestionId) => {
@@ -34,6 +36,10 @@ export default class App extends React.Component {
     switch (true) {
       case nextQuestionId === 'init':
         setTimeout(() => this.displayNextQuestion(nextQuestionId), 500)
+        break
+
+      case nextQuestionId === 'contact':
+        this.handleClickOpen()
         break
 
       case /^https*/.test(nextQuestionId): //nextQuestionIdがhttpsで始まるかどうか
@@ -57,6 +63,14 @@ export default class App extends React.Component {
     }
   }
 
+  handleClickOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
   componentDidMount() {
     const initAnswer = ''
     this.selectAnswers(initAnswer, this.state.currentId)
@@ -78,6 +92,7 @@ export default class App extends React.Component {
             answers={this.state.answers}
             select={this.selectAnswers}
           />
+          <FormDialog open={this.state.open} handleClose={this.handleClose} />
         </div>
       </section>
     )

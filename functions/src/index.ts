@@ -24,7 +24,7 @@ export const addDataset = functions.https.onRequest(
         const data = dataset[key]
         await db.collection('questions').doc(key).set(data)
       }
-      sendResponse(req, 200, { message: 'Successfully added dataset!' })
+      sendResponse(res, 200, { message: 'Successfully added dataset!' })
     }
   }
 )

@@ -1,0 +1,42 @@
+{
+  "init": {
+    "answers": [
+      { "content": "どんな人か知りたい", "nextId": "who_are_you" },
+      { "content": "仕事を依頼したい", "nextId": "job_offer" },
+      { "content": "会って話をしてみたい", "nextId": "meeting" }
+    ],
+    "question": "こんにちは！ご用件はなんでしょうか？"
+  },
+  "who_are_you": {
+    "answers": [
+      {
+        "content": "twitterのアカウント",
+        "nextId": "https://twitter.com/koba_prog"
+      },
+      {
+        "content": "qiitaのアカウント",
+        "nextId": "https://qiita.com/koba_prog"
+      },
+      { "content": "その他", "nextId": "other_jobs" }
+    ],
+    "question": "私の何が知りたいですか？"
+  },
+  "job_offer": {
+    "answers": [{ "content": "その他", "nextId": "other_jobs" }],
+    "question": "どのようなお仕事でしょうか？"
+  },
+  "other_jobs": {
+    "answers": [
+      { "content": "問い合わせる", "nextId": "contact" },
+      { "content": "最初の質問に戻る", "nextId": "init" }
+    ],
+    "question": "その他についてですね。コチラからお問い合わせできます。"
+  },
+  "meeting": {
+    "answers": [
+      { "content": "問い合わせる", "nextId": "contact" },
+      { "content": "最初の質問に戻る", "nextId": "init" }
+    ],
+    "question": "まずは一緒にランチでもいかがですか？"
+  }
+}
